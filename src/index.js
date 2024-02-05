@@ -1,11 +1,11 @@
 import React, { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import "./styles.css";
-import Game from "./Game";
+import "./styles/styles.css";
+import App from "./App.tsx";
 
 const root = createRoot(document.getElementById("root"));
 root.render(
   <StrictMode>
-    <Game />
+    <App />
   </StrictMode>
 );
