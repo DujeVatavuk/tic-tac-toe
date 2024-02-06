@@ -16,36 +16,25 @@ export default function Board({ xIsNext, squares, onPlay }) {
     onPlay(nextSquares);
   }
 
-  function square(i) {
-    return (
-      <Square value={squares[i]} onSquareClick={() => handleClick(i)} />
-    );
-  }
-
-  function row(i) {
-    return (
-      <div className="board-row">
-        {square(3*i)}
-        {square(3*i + 1)}
-        {square(3*i + 2)}
-      </div>
-    );
-  }
-
-  function board() { 
-    return (
-      <>
-        {row(0)}
-        {row(1)}
-        {row(2)}
-      </>
-    );
-  }
-
   return (
     <>
       <div className="status">{status}</div>
-      {board()}
+      {[0, 1, 3].map((i) => {
+        return (
+          <div key={i} className="board-row">
+            {[3 * i, 3 * i + 1, 3 * i + 2].map((j) => {
+              return (
+                <div key={j}>
+                  <Square
+                    value={squares[j]}
+                    onSquareClick={() => handleClick(j)}
+                  />
+                </div>
+              );
+            })}
+          </div>
+        );
+      })}
     </>
   );
 }
