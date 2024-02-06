@@ -32,12 +32,20 @@ export default function Board({ xIsNext, squares, onPlay }) {
     );
   }
 
+  function board() { 
+    return (
+      <>
+        {row(0)}
+        {row(1)}
+        {row(2)}
+      </>
+    );
+  }
+
   return (
     <>
       <div className="status">{status}</div>
-      {row(0)}
-      {row(1)}
-      {row(2)}
+      {board()}
     </>
   );
 }
