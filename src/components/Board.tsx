@@ -2,7 +2,8 @@ import React from "react";
 import Square from "./Square.tsx";
 
 export default function Board({ xIsNext, squares, onPlay }) {
-  const winner = calculateWinner(squares);
+  const winner = calculateWinner(squares)?.winner;
+  const winnerFields = calculateWinner(squares)?.winnerFields ?? [];
   let status = '';
   status = winner
     ? `Winner: ${winner}`
@@ -26,6 +27,7 @@ export default function Board({ xIsNext, squares, onPlay }) {
               return (
                 <div key={j}>
                   <Square
+                    winner={winnerFields.includes(j)}
                     value={squares[j]}
                     onSquareClick={() => handleClick(j)}
                   />
@@ -39,7 +41,7 @@ export default function Board({ xIsNext, squares, onPlay }) {
   );
 }
 
-function calculateWinner(squares) {
+function calculateWinner(squares): { winner: string, winnerFields: number[] } | null {
   const lines = [
     [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
     [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns
@@ -50,7 +52,7 @@ function calculateWinner(squares) {
     if (squares[a] &&
       squares[a] === squares[b] &&
       squares[a] === squares[c]) {
-      return squares[a];
+      return { winner: squares[a], winnerFields: lines[i] };
     }
   }
   return null;
