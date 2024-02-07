@@ -19,7 +19,7 @@ export default function Board({ xIsNext, squares, onPlay }) {
   return (
     <>
       <div className="status">{status}</div>
-      {[0, 1, 3].map((i) => {
+      {[0, 1, 2].map((i) => {
         return (
           <div key={i} className="board-row">
             {[3 * i, 3 * i + 1, 3 * i + 2].map((j) => {
